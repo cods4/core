@@ -1,0 +1,55 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "NZ WITS Spot Price",
+        "description": "Enter your WITS API credentials to connect to the New Zealand electricity spot price data.",
+        "data": {
+          "client_id": "Client ID",
+          "client_secret": "Client Secret",
+          "node": "Node (GXP)"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Re-authenticate NZ WITS",
+        "description": "Re-enter your WITS API credentials.",
+        "data": {
+          "client_id": "Client ID",
+          "client_secret": "Client Secret",
+          "node": "Node (GXP)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to WITS API",
+      "invalid_auth": "Invalid credentials",
+      "unknown": "Unexpected error occurred"
+    },
+    "abort": {
+      "already_configured": "Node already configured",
+      "reauth_successful": "Re-authentication successful"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "NZ WITS Options",
+        "description": "Configure which price schedules to update and modify connection settings.",
+        "data": {
+          "client_id": "Client ID",
+          "client_secret": "Client Secret", 
+          "node": "Node (GXP)",
+          "update_rtd": "Update RTD (Real Time Dispatch)",
+          "update_interim": "Update Interim prices",
+          "update_prss": "Update PRSS (3-hour forecast)",
+          "update_prsl": "Update PRSL (24-hour forecast)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to WITS API",
+      "invalid_auth": "Invalid credentials",
+      "unknown": "Unexpected error occurred"
+    }
+  }
+}

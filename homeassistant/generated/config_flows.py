@@ -420,6 +420,7 @@ FLOWS = {
         "nextbus",
         "nextcloud",
         "nextdns",
+        "nz_wits",
         "nfandroidtv",
         "nibe_heatpump",
         "nice_go",

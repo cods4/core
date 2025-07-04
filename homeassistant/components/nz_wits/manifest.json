@@ -1,0 +1,10 @@
+{
+  "domain": "nz_wits",
+  "name": "NZ WITS Spot Price",
+  "codeowners": ["@cods4"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://www.home-assistant.io/integrations/nz_wits",
+  "iot_class": "cloud_polling",
+  "requirements": []
+}
