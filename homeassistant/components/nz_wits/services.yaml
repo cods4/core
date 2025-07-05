@@ -1,0 +1,103 @@
+get_historical_prices:
+  fields:
+    config_entry_id:
+      required: true
+      selector:
+        config_entry:
+          integration: nz_wits
+    start_date:
+      required: true
+      selector:
+        date:
+    end_date:
+      required: false
+      selector:
+        date:
+    schedule:
+      required: false
+      default: "RTD"
+      selector:
+        select:
+          options:
+            - "RTD"
+            - "Interim"
+            - "PRSS"
+            - "PRSL"
+    node:
+      required: false
+      selector:
+        text:
+
+get_node_info:
+  fields:
+    config_entry_id:
+      required: true
+      selector:
+        config_entry:
+          integration: nz_wits
+    island:
+      required: false
+      selector:
+        select:
+          options:
+            - "NI"
+            - "SI"
+
+get_price_statistics:
+  fields:
+    config_entry_id:
+      required: true
+      selector:
+        config_entry:
+          integration: nz_wits
+    schedule:
+      required: false
+      selector:
+        select:
+          options:
+            - "RTD"
+            - "Interim"
+            - "PRSS"
+            - "PRSL"
+
+get_forecast_summary:
+  fields:
+    config_entry_id:
+      required: true
+      selector:
+        config_entry:
+          integration: nz_wits
+    schedule:
+      required: false
+      default: "PRSS"
+      selector:
+        select:
+          options:
+            - "PRSS"
+            - "PRSL"
+
+get_price_alerts:
+  fields:
+    config_entry_id:
+      required: true
+      selector:
+        config_entry:
+          integration: nz_wits
+    high_threshold:
+      required: false
+      default: 0.30
+      selector:
+        number:
+          min: 0.01
+          max: 2.00
+          step: 0.01
+          unit_of_measurement: "NZD/kWh"
+    low_threshold:
+      required: false
+      default: 0.05
+      selector:
+        number:
+          min: 0.00
+          max: 1.00
+          step: 0.01
+          unit_of_measurement: "NZD/kWh"

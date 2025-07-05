@@ -1,0 +1,47 @@
+{
+  "entity": {
+    "sensor": {
+      "rtd_price": {
+        "default": "mdi:lightning-bolt"
+      },
+      "interim_price": {
+        "default": "mdi:clock-outline"
+      },
+      "prss_price": {
+        "default": "mdi:chart-line"
+      },
+      "prsl_price": {
+        "default": "mdi:chart-timeline-variant"
+      },
+      "current_price": {
+        "default": "mdi:cash"
+      },
+      "average_price": {
+        "default": "mdi:cash-multiple"
+      },
+      "forecast_next_hour": {
+        "default": "mdi:clock-fast"
+      },
+      "forecast_summary": {
+        "default": "mdi:chart-bell-curve"
+      }
+    }
+  },
+  "services": {
+    "get_historical_prices": {
+      "service": "mdi:history"
+    },
+    "get_node_info": {
+      "service": "mdi:information-outline"
+    },
+    "get_price_statistics": {
+      "service": "mdi:chart-bar"
+    },
+    "get_forecast_summary": {
+      "service": "mdi:crystal-ball"
+    },
+    "get_price_alerts": {
+      "service": "mdi:alert-circle-outline"
+    }
+  }
+}

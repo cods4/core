@@ -2,12 +2,28 @@
   "config": {
     "step": {
       "user": {
-        "title": "NZ WITS Spot Price",
+        "title": "NZ WITS Spot Price - Credentials",
         "description": "Enter your WITS API credentials to connect to the New Zealand electricity spot price data.",
         "data": {
           "client_id": "Client ID",
-          "client_secret": "Client Secret",
+          "client_secret": "Client Secret"
+        }
+      },
+      "node": {
+        "title": "NZ WITS Spot Price - Node Selection",
+        "description": "Select the grid exit point (GXP) node to monitor for electricity pricing. All available nodes have been validated to provide pricing data.",
+        "data": {
           "node": "Node (GXP)"
+        }
+      },
+      "schedules": {
+        "title": "NZ WITS Spot Price - Schedule Selection",
+        "description": "Select which price schedules to enable. You can change this later in integration options.",
+        "data": {
+          "update_rtd": "Real Time Dispatch (RTD) - Current 5-minute spot price",
+          "update_interim": "Interim Price - Provisional price for previous trading period",
+          "update_prss": "Price Responsive Schedule Short (PRSS) - 3-hour price forecast",
+          "update_prsl": "Price Responsive Schedule Long (PRSL) - 24-hour price forecast"
         }
       },
       "reauth_confirm": {
@@ -30,19 +46,68 @@
       "reauth_successful": "Re-authentication successful"
     }
   },
+  "entity": {
+    "sensor": {
+      "rtd_price": {
+        "name": "Real Time Dispatch price"
+      },
+      "interim_price": {
+        "name": "Interim price"
+      },
+      "prss_price": {
+        "name": "PRSS forecast price"
+      },
+      "prsl_price": {
+        "name": "PRSL forecast price"
+      },
+      "current_price": {
+        "name": "Current price"
+      },
+      "average_price": {
+        "name": "Average price"
+      },
+      "forecast_next_hour": {
+        "name": "Next hour forecast"
+      },
+      "forecast_summary": {
+        "name": "Forecast summary"
+      }
+    }
+  },
+  "exceptions": {
+    "config_entry_not_found": {
+      "message": "Config entry {entry_id} not found"
+    },
+    "config_entry_not_loaded": {
+      "message": "The NZ WITS integration is currently not loaded or disabled"
+    },
+    "service_auth_failed": {
+      "message": "Service call failed due to authentication error"
+    },
+    "service_connection_failed": {
+      "message": "Service call failed due to connection error"
+    },
+    "historical_data_unavailable": {
+      "message": "Historical data unavailable for {start_date} to {end_date}"
+    },
+    "invalid_schedule_type": {
+      "message": "Invalid schedule type: {schedule_type}"
+    },
+    "node_unavailable": {
+      "message": "Selected node {node} is not available"
+    }
+  },
   "options": {
     "step": {
       "init": {
         "title": "NZ WITS Options",
         "description": "Configure which price schedules to update and modify connection settings.",
         "data": {
-          "client_id": "Client ID",
-          "client_secret": "Client Secret", 
           "node": "Node (GXP)",
-          "update_rtd": "Update RTD (Real Time Dispatch)",
-          "update_interim": "Update Interim prices",
-          "update_prss": "Update PRSS (3-hour forecast)",
-          "update_prsl": "Update PRSL (24-hour forecast)"
+          "update_rtd": "Real Time Dispatch (RTD) - Current 5-minute spot price",
+          "update_interim": "Interim Price - Provisional price for previous trading period",
+          "update_prss": "Price Responsive Schedule Short (PRSS) - 3-hour price forecast",
+          "update_prsl": "Price Responsive Schedule Long (PRSL) - 24-hour price forecast"
         }
       }
     },
@@ -50,6 +115,94 @@
       "cannot_connect": "Failed to connect to WITS API",
       "invalid_auth": "Invalid credentials",
       "unknown": "Unexpected error occurred"
+    }
+  },
+  "services": {
+    "get_historical_prices": {
+      "name": "Get historical prices",
+      "description": "Retrieve historical electricity prices for a specified date range and schedule type.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Config entry",
+          "description": "The NZ WITS integration to use"
+        },
+        "start_date": {
+          "name": "Start date",
+          "description": "Start date for historical data retrieval"
+        },
+        "end_date": {
+          "name": "End date",
+          "description": "End date for historical data retrieval (defaults to start_date if not specified)"
+        },
+        "schedule": {
+          "name": "Schedule type",
+          "description": "Type of price schedule to retrieve"
+        },
+        "node": {
+          "name": "Node",
+          "description": "Grid node to retrieve data for (defaults to configured node)"
+        }
+      }
+    },
+    "get_node_info": {
+      "name": "Get node information",
+      "description": "Retrieve information about available grid nodes and schedules.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Config entry",
+          "description": "The NZ WITS integration to use"
+        },
+        "island": {
+          "name": "Island filter",
+          "description": "Filter nodes by island (North Island or South Island)"
+        }
+      }
+    },
+    "get_price_statistics": {
+      "name": "Get price statistics",
+      "description": "Calculate comprehensive price statistics for current data.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Config entry",
+          "description": "The NZ WITS integration to use"
+        },
+        "schedule": {
+          "name": "Schedule type",
+          "description": "Specific schedule to analyze (if not specified, analyzes all available schedules)"
+        }
+      }
+    },
+    "get_forecast_summary": {
+      "name": "Get forecast summary",
+      "description": "Generate a comprehensive summary of price forecasts for PRSS or PRSL schedules.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Config entry",
+          "description": "The NZ WITS integration to use"
+        },
+        "schedule": {
+          "name": "Forecast schedule",
+          "description": "Forecast schedule type to summarize"
+        }
+      }
+    },
+    "get_price_alerts": {
+      "name": "Get price alerts",
+      "description": "Generate price alerts based on high and low price thresholds.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Config entry",
+          "description": "The NZ WITS integration to use"
+        },
+        "high_threshold": {
+          "name": "High price threshold",
+          "description": "Price threshold for high price alerts (NZD per kWh)"
+        },
+        "low_threshold": {
+          "name": "Low price threshold",
+          "description": "Price threshold for low price alerts (NZD per kWh)"
+        }
+      }
     }
   }
 }

@@ -4347,12 +4347,6 @@
       "config_flow": true,
       "iot_class": "cloud_polling"
     },
-    "nz_wits": {
-      "name": "NZ WITS Spot Price",
-      "integration_type": "service",
-      "config_flow": true,
-      "iot_class": "cloud_polling"
-    },
     "nfandroidtv": {
       "name": "Notifications for Android TV / Fire TV",
       "integration_type": "service",
@@ -4525,6 +4519,12 @@
     },
     "nyt_games": {
       "name": "NYT Games",
+      "integration_type": "service",
+      "config_flow": true,
+      "iot_class": "cloud_polling"
+    },
+    "nz_wits": {
+      "name": "NZ WITS Spot Price",
       "integration_type": "service",
       "config_flow": true,
       "iot_class": "cloud_polling"

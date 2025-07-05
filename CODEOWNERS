@@ -1076,6 +1076,8 @@ build.json @home-assistant/supervisor
 /tests/components/nws/ @MatthewFlamm @kamiyo
 /homeassistant/components/nyt_games/ @joostlek
 /tests/components/nyt_games/ @joostlek
+/homeassistant/components/nz_wits/ @cods4
+/tests/components/nz_wits/ @cods4
 /homeassistant/components/nzbget/ @chriscla
 /tests/components/nzbget/ @chriscla
 /homeassistant/components/obihai/ @dshokouhi @ejpenney
